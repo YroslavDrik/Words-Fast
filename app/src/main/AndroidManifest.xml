@@ -13,6 +13,21 @@
         android:theme="@style/Theme.WordsFast"
         tools:targetApi="31">
         <activity
+            android:name=".MixedModeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewWordsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LearnNewWordsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LearnNewWordsCard"
+            android:exported="false" />
+        <activity
+            android:name=".WordsFast"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

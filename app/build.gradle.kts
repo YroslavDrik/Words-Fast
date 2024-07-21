@@ -32,11 +32,13 @@ android {
 }
 
 dependencies {
+    implementation ("com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1")
 
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.gridlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
