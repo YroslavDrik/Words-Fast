@@ -69,10 +69,6 @@ public class WordsFast extends AppCompatActivity {
         setProgressBarWords(0 , 65);
 
 
-            DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
-
-
-
 
     }
 
