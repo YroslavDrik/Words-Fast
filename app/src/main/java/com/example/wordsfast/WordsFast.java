@@ -2,7 +2,9 @@ package com.example.wordsfast;
 
 import android.animation.ObjectAnimator;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +24,8 @@ public class WordsFast extends AppCompatActivity {
 
     private ProgressBar ProgressBarWords;
 
-    private TextView TextAddWords;
+    private TextView TextProgressWords;
+    private SharedPreferences sharedPref;
 
 
     @Override
@@ -62,11 +65,18 @@ public class WordsFast extends AppCompatActivity {
         ReviewWordsCard = findViewById(R.id.ReviewWordsCard);
         MixedModeCard = findViewById(R.id.MixedModeCard);
 
-
-        TextAddWords = findViewById(R.id.TextAddWords);
+        TextProgressWords = findViewById(R.id.progressText);
 
         ProgressBarWords = findViewById(R.id.progressBar);
-        setProgressBarWords(0 , 65);
+
+
+
+
+        sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        int IndexWord = sharedPref.getInt("myNumber", 0);
+        ProgressBarWords.setProgress(IndexWord);
+        TextProgressWords.setText( IndexWord+"/575");
+        setProgressBarWords(0 , IndexWord);
 
 
 

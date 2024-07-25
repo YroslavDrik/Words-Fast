@@ -57,7 +57,7 @@
                         android:layout_marginBottom="25dp"
                         android:indeterminate="false"
                         android:indeterminateOnly="false"
-                        android:max="100"
+                        android:max="576"
                         android:progress="75"
                         android:progressDrawable="@drawable/style_progress_bar"
                         android:rotation="270" />

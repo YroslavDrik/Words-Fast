@@ -8,5 +8,10 @@
     <color name="cardview_background">#1D3A50</color>
     <color name="cardviewOne_background">#244b69</color>
     <color name="Layout_background">#1D3A50</color>
+    <color name="background_button">#2A5576</color>
+    <color name="CardAnimDark">#162f3f</color>
+    <color name="greenButton">#15AD18</color>
+    <color name="redButton">#C81126</color>
+
 
 </resources>
