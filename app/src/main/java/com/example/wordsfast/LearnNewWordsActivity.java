@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,16 +20,21 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 public class LearnNewWordsActivity extends AppCompatActivity {
 
+    private static final int PERMISSION_REQUEST_CODE = 1;
     private DataBaseHelper dataBaseHelper;
 
     private SharedPreferences sharedPref;
@@ -68,6 +75,12 @@ public class LearnNewWordsActivity extends AppCompatActivity {
         IndexWord = sharedPref.getInt("myNumber", 0);
 
         init();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            NotificationHelper.checkNotificationPermission(this);
+        } else {
+            NotificationHelper.createNotificationChannel(this);
+            NotificationHelper.scheduleNotification(this);
+        }
 
     }
 
@@ -80,9 +93,9 @@ public class LearnNewWordsActivity extends AppCompatActivity {
 
     private void AddCardTestWord() {
         for (int Index = 0; Index < 10; Index++) {
-            if(Index == 0){
+            if (Index == 0) {
                 isButton = true;
-            }else{
+            } else {
                 isButton = false;
             }
             IndexWord++;
@@ -103,7 +116,7 @@ public class LearnNewWordsActivity extends AppCompatActivity {
 
             String[] WordArray = GenerationQuestions(randomNumber, WordDataBase);
 
-            setViewQuestions(WordArray, WordTestTextView, AnswerOptionOneButton, AnswerOptionTwoButton, AnswerOptionThreeButton, CardWordTest ,isButton);
+            setViewQuestions(WordArray, WordTestTextView, AnswerOptionOneButton, AnswerOptionTwoButton, AnswerOptionThreeButton, CardWordTest, isButton);
 
 
         }
@@ -176,7 +189,7 @@ public class LearnNewWordsActivity extends AppCompatActivity {
 
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    protected void setViewQuestions(String[] Array, TextView Text, Button ButtonOne, Button ButtonTwo, Button ButtonThree, View CardDel ,boolean IsButton) {
+    protected void setViewQuestions(String[] Array, TextView Text, Button ButtonOne, Button ButtonTwo, Button ButtonThree, View CardDel, boolean IsButton) {
         Text.setText(Array[0]);
         int Num = getRandomNumberInRange(1, 3);
         if (Num == 1) {
@@ -189,8 +202,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }
@@ -205,8 +218,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }
@@ -221,8 +234,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }
@@ -237,8 +250,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }
@@ -253,8 +266,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }
@@ -268,8 +281,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }
@@ -284,8 +297,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }
@@ -300,8 +313,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }
@@ -316,8 +329,8 @@ public class LearnNewWordsActivity extends AppCompatActivity {
                     Animation AnimationLeft = AnimationUtils.loadAnimation(LearnNewWordsActivity.this, R.anim.left_anim_layout);
                     CardDel.startAnimation(AnimationLeft);
                     constraintLayout.removeView(CardDel);
-                    if(IsButton){
-                        startActivity(new Intent(LearnNewWordsActivity.this , WordsFast.class));
+                    if (IsButton) {
+                        startActivity(new Intent(LearnNewWordsActivity.this, WordsFast.class));
                         isButton = false;
                     }
                 }

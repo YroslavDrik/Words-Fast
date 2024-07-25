@@ -1,11 +1,10 @@
 package com.example.wordsfast;
 
 import android.animation.ObjectAnimator;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -20,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class WordsFast extends AppCompatActivity {
 
-    private CardView LearnNewWordsCard , MixedModeCard , ReviewWordsCard;
+    private CardView LearnNewWordsCard, MixedModeCard, ReviewWordsCard;
 
     private ProgressBar ProgressBarWords;
 
@@ -40,27 +39,28 @@ public class WordsFast extends AppCompatActivity {
         });
         init();
 
-    LearnNewWordsCard.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            startActivity(new Intent(WordsFast.this , LearnNewWordsActivity.class));
-        }
-    });
-    ReviewWordsCard.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            startActivity(new Intent(WordsFast.this , ReviewWordsActivity.class));
-        }
-    });
+        LearnNewWordsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WordsFast.this, LearnNewWordsActivity.class));
+            }
+        });
+        ReviewWordsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WordsFast.this, ReviewWordsActivity.class));
+            }
+        });
 
-    MixedModeCard.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            startActivity(new Intent(WordsFast.this , MixedModeActivity.class));
-        }
-    });
+        MixedModeCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WordsFast.this, MixedModeActivity.class));
+            }
+        });
     }
-    private void init(){
+
+    private void init() {
         LearnNewWordsCard = findViewById(R.id.LearnNewWordsCard);
         ReviewWordsCard = findViewById(R.id.ReviewWordsCard);
         MixedModeCard = findViewById(R.id.MixedModeCard);
@@ -69,21 +69,15 @@ public class WordsFast extends AppCompatActivity {
 
         ProgressBarWords = findViewById(R.id.progressBar);
 
-
-
-
         sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         int IndexWord = sharedPref.getInt("myNumber", 0);
         ProgressBarWords.setProgress(IndexWord);
-        TextProgressWords.setText( IndexWord+"/575");
-        setProgressBarWords(0 , IndexWord);
-
-
-
+        TextProgressWords.setText(IndexWord + "/575");
+        setProgressBarWords(0, IndexWord);
     }
 
 
-    private void setProgressBarWords(int ValueZero ,int FullValue ){
+    private void setProgressBarWords(int ValueZero, int FullValue) {
         ObjectAnimator animation = ObjectAnimator.ofInt(ProgressBarWords, "progress", ValueZero, FullValue);
         animation.setDuration(1000);
         animation.start();

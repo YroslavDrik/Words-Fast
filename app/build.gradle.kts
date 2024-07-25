@@ -33,6 +33,8 @@ android {
 
 dependencies {
     implementation ("com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1")
+    implementation("androidx.core:core:1.10.0")
+    implementation("androidx.work:work-runtime:2.8.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
